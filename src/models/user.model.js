@@ -53,7 +53,7 @@ const userSchema = new Schema(
 userSchema.pre("save" , async function (next){
     if(!this.isModified("password")) return next();
 
-    this.password = becrypt.hash(this.password, 7);
+    this.password = await becrypt.hash(this.password, 7);
     next();
 })
 userSchema.methods.isPasswrdCorrect = async function (password) {
